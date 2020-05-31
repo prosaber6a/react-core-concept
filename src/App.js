@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
@@ -17,6 +17,7 @@ function App() {
     <div className="App">
     <header className="App-header">
     <p>I am a React Person</p>
+    <Counter></Counter>
     <ul>
       {
         heros.map( hero => <li>{hero}</li> )
@@ -35,42 +36,57 @@ function App() {
     </header>
     </div>
     );
-  }
+}
   
-  function Product (props) {
-    const productStyle = {
-      border: '1px solid gray',
-      borderRadius: '5px',
-      backgroundColor: 'lightgray',
-      height: '250px',
-      width: '200px',
-      float: 'left'
+function Product (props) {
+  const productStyle = {
+    border: '1px solid gray',
+    borderRadius: '5px',
+    backgroundColor: 'lightgray',
+    height: '250px',
+    width: '200px',
+    float: 'left'
+  }
+  const {name, price} = props.product;
+  return (
+    <div style={productStyle}>
+    <h3>Name: {name}</h3>
+    <h5>{price}</h5>
+    <button>Buy now</button>
+    </div>
+    );
+}
+  
+  function Person(properties) {
+    
+    
+    const personStyle = {
+      border:"2px solid red",
+      margin: "10px",
+      width: "400px"
     }
-    const {name, price} = props.product;
     return (
-      <div style={productStyle}>
-      <h3>Name: {name}</h3>
-      <h5>{price}</h5>
-      <button>Buy now</button>
+      <div style={personStyle}>
+      <h1>Name: {properties.name}</h1>
+      <h3>Loves to eat {properties.food}</h3>
       </div>
       );
-    }
+  }
+
+
+  function Counter() {
+    const [count, setCount] = useState(10);
+    const handleIncrease = () => setCount(count + 1);
+    const handleDecrease = () => setCount(count - 1);
     
-    function Person(properties) {
-      
-      
-      const personStyle = {
-        border:"2px solid red",
-        margin: "10px",
-        width: "400px"
-      }
-      return (
-        <div style={personStyle}>
-        <h1>Name: {properties.name}</h1>
-        <h3>Loves to eat {properties.food}</h3>
-        </div>
-        );
-      }
-      
-      export default App;
+    return (
+      <div>
+        <h1>Count: {count}</h1>
+        <button onClick={handleDecrease}>Decrease</button>
+        <button onClick={handleIncrease}>Increase</button>
+      </div>
+    );
+  }
+    
+    export default App;
       
