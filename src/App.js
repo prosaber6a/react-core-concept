@@ -4,19 +4,31 @@ import './App.css';
 
 function App() {
   
+  const heros = ['Razzak', 'Jashim', 'Alamgir', 'Salman', 'Manna', 'Bappi'];
+  
   const products = [
     {name: 'Photoshop', price:'$90.99'},
     {name: 'Illustrator', price:'$60.99'},
     {name: 'PDF Reader', price:'$6.99'}
   ];
   
+  
   return (
     <div className="App">
     <header className="App-header">
     <p>I am a React Person</p>
-    <Product product={products[0]}></Product>
-    <Product product={products[1]}></Product>
-    <Product product={products[2]}></Product>
+    <ul>
+      {
+        heros.map( hero => <li>{hero}</li> )
+      }
+      {
+        products.map( product => <li>{product.name}</li> )
+      }
+    </ul>
+    {
+      products.map( product => <Product product={product}></Product> )
+    }
+    
     <Person name="Rubel" food="Fish"></Person>
     <Person name="Sakil" food="Chicken"></Person>
     <Person name="Zahid" food="Egg"></Person>
@@ -45,7 +57,7 @@ function App() {
     }
     
     function Person(properties) {
-      console.log(properties);
+      
       
       const personStyle = {
         border:"2px solid red",
