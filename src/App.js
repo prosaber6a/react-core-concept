@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
@@ -18,6 +18,7 @@ function App() {
     <header className="App-header">
     <p>I am a React Person</p>
     <Counter></Counter>
+    <Users></Users>
     <ul>
       {
         heros.map( hero => <li>{hero}</li> )
@@ -57,36 +58,57 @@ function Product (props) {
     );
 }
   
-  function Person(properties) {
-    
-    
-    const personStyle = {
-      border:"2px solid red",
-      margin: "10px",
-      width: "400px"
-    }
-    return (
-      <div style={personStyle}>
-      <h1>Name: {properties.name}</h1>
-      <h3>Loves to eat {properties.food}</h3>
-      </div>
-      );
+function Person(properties) {
+  
+  
+  const personStyle = {
+    border:"2px solid red",
+    margin: "10px",
+    width: "400px"
   }
-
-
-  function Counter() {
-    const [count, setCount] = useState(10);
-    const handleIncrease = () => setCount(count + 1);
-    const handleDecrease = () => setCount(count - 1);
-    
-    return (
-      <div>
-        <h1>Count: {count}</h1>
-        <button onClick={handleDecrease}>Decrease</button>
-        <button onClick={handleIncrease}>Increase</button>
-      </div>
+  return (
+    <div style={personStyle}>
+    <h1>Name: {properties.name}</h1>
+    <h3>Loves to eat {properties.food}</h3>
+    </div>
     );
-  }
+}
+
+
+function Counter() {
+  const [count, setCount] = useState(10);
+  const handleIncrease = () => setCount(count + 1);
+  const handleDecrease = () => setCount(count - 1);
+  
+  return (
+    <div>
+      <h1>Count: {count}</h1>
+      <button onClick={handleDecrease}>Decrease</button>
+      <button onClick={handleIncrease}>Increase</button>
+    </div>
+  );
+}
+
+function Users() {
+  const [users , setUsers] = useState([]);
+  useEffect(()=>{
+    fetch("https://jsonplaceholder.typicode.com/users")
+    .then(response => response.json())
+    .then(data => setUsers(data))
+  });
+  return (
+    <div>
+      <h3>Dynamic Users: {users.length}</h3>
+      <ul>
+        {
+          users.map(user => <li>{user.name}</li>)
+        }
+      </ul>
+    </div>
+  );
+}
+
+
     
-    export default App;
+export default App;
       
